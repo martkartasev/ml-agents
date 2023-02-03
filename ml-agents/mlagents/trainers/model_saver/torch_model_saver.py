@@ -46,6 +46,10 @@ class TorchModelSaver(BaseModelSaver):
             self.policy = module
             self.exporter = ModelSerializer(self.policy)
 
+        if self.exporter is not None and isinstance(module, TorchOptimizer):
+            self.optimizer = module
+            self.exporter.set_optimizer(module)
+
     def save_checkpoint(self, behavior_name: str, step: int) -> Tuple[str, List[str]]:
         if not os.path.exists(self.model_path):
             os.makedirs(self.model_path)

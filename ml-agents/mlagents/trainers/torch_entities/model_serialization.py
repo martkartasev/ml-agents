@@ -5,7 +5,6 @@ from mlagents.torch_utils import torch
 from mlagents_envs.logging_util import get_logger
 from mlagents.trainers.settings import SerializationSettings
 
-
 logger = get_logger(__name__)
 
 
@@ -141,6 +140,10 @@ class ModelSerializer:
         if self.policy.export_memory_size > 0:
             self.output_names += [TensorNames.recurrent_output]
 
+    def set_optimizer(self, optimizer):
+        self.optimizer = optimizer
+        self.output_names_vf = [TensorNames.value_estimate_output, TensorNames.memory_size]
+
     @staticmethod
     def _get_onnx_shape(shape: Tuple[int, ...]) -> Tuple[int, ...]:
         """
@@ -170,4 +173,15 @@ class ModelSerializer:
                 output_names=self.output_names,
                 dynamic_axes=self.dynamic_axes,
             )
-        logger.info(f"Exported {onnx_output_path}")
+        logger.info(f"Exported policy {onnx_output_path}")
+
+        onnx_output_path = f"{output_filepath}_vf.onnx"
+        with exporting_to_onnx():
+            torch.onnx.export(
+                self.optimizer.critic,
+                self.dummy_input,
+                onnx_output_path,
+                input_names=self.input_names,
+                output_names=self.output_names_vf,
+            )
+        logger.info(f"Exported value function {onnx_output_path}")
