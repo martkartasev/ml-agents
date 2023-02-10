@@ -563,7 +563,7 @@ namespace Unity.MLAgents
         /// <seealso cref="OnEnable"/>
         protected virtual void OnDisable()
         {
-            DemonstrationWriters.Clear();
+           // DemonstrationWriters.Clear();
 
             // If Academy.Dispose has already been called, we don't need to unregister with it.
             // We don't want to even try, because this will lazily create a new Academy!
