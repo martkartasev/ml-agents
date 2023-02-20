@@ -17,6 +17,8 @@ from mlagents.trainers.poca.trainer import POCATrainer
 from mlagents.trainers.ppo.optimizer_torch import PPOSettings
 from mlagents.trainers.sac.optimizer_torch import SACSettings
 from mlagents.trainers.poca.optimizer_torch import POCASettings
+from mlagents.trainers.ppo_vf.trainer import PPOVFTrainer
+
 from mlagents import plugins as mla_plugins
 
 logger = logging_util.get_logger(__name__)
@@ -30,6 +32,7 @@ def get_default_trainer_types() -> Tuple[Dict[str, Any], Dict[str, Any]]:
     mla_plugins.all_trainer_types.update(
         {
             PPOTrainer.get_trainer_name(): PPOTrainer,
+            PPOVFTrainer.get_trainer_name(): PPOVFTrainer,
             SACTrainer.get_trainer_name(): SACTrainer,
             POCATrainer.get_trainer_name(): POCATrainer,
         }
@@ -38,6 +41,7 @@ def get_default_trainer_types() -> Tuple[Dict[str, Any], Dict[str, Any]]:
     mla_plugins.all_trainer_settings.update(
         {
             PPOTrainer.get_trainer_name(): PPOSettings,
+            PPOVFTrainer.get_trainer_name(): PPOSettings,
             SACTrainer.get_trainer_name(): SACSettings,
             POCATrainer.get_trainer_name(): POCASettings,
         }

@@ -596,6 +596,7 @@ namespace Unity.MLAgents
             m_Info.done = true;
             m_Info.maxStepReached = doneReason == DoneReason.MaxStepReached;
             m_Info.groupId = m_GroupId;
+
             UpdateSensors();
             // Make sure the latest observations are being passed to training.
             using (m_CollectObservationsChecker.Start())
