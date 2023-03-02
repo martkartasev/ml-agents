@@ -140,7 +140,7 @@ class TorchPPOVFOptimizer(TorchOptimizer):
         value_loss = ModelUtils.trust_region_value_loss(
             values, old_values, returns, decay_eps, loss_masks
         )
-        loss = (1.0 * value_loss)
+        loss = (0.5 * value_loss)
 
         # Set optimizer learning rate
         ModelUtils.update_learning_rate(self.optimizer, decay_lr)
