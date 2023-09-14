@@ -1,3 +1,5 @@
+pip install protobuf 3.20.3
+pip install onnx
 pip install torch -f https://download.pytorch.org/whl/torch_stable.html
 pip install -e ./ml-agents-envs
 pip install -e ./ml-agents

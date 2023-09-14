@@ -3,6 +3,7 @@ from typing import Dict, Tuple, Any
 
 # importlib.metadata is new in python3.8
 # We use the backport for older python versions.
+
 if sys.version_info < (3, 8):
     import importlib_metadata
 else:
@@ -18,6 +19,8 @@ from mlagents.trainers.ppo.optimizer_torch import PPOSettings
 from mlagents.trainers.sac.optimizer_torch import SACSettings
 from mlagents.trainers.poca.optimizer_torch import POCASettings
 from mlagents.trainers.ppo_vf.trainer import PPOVFTrainer
+from mlagents.trainers.sac_erskine.trainer import SACErskineTrainer
+from mlagents.trainers.sac_erskine.optimizer_torch import SACErskineSettings
 
 from mlagents import plugins as mla_plugins
 
@@ -34,6 +37,7 @@ def get_default_trainer_types() -> Tuple[Dict[str, Any], Dict[str, Any]]:
             PPOTrainer.get_trainer_name(): PPOTrainer,
             PPOVFTrainer.get_trainer_name(): PPOVFTrainer,
             SACTrainer.get_trainer_name(): SACTrainer,
+            SACErskineTrainer.get_trainer_name(): SACErskineTrainer,
             POCATrainer.get_trainer_name(): POCATrainer,
         }
     )
@@ -43,6 +47,7 @@ def get_default_trainer_types() -> Tuple[Dict[str, Any], Dict[str, Any]]:
             PPOTrainer.get_trainer_name(): PPOSettings,
             PPOVFTrainer.get_trainer_name(): PPOSettings,
             SACTrainer.get_trainer_name(): SACSettings,
+            SACErskineTrainer.get_trainer_name(): SACErskineSettings,
             POCATrainer.get_trainer_name(): POCASettings,
         }
     )

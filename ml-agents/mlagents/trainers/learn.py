@@ -10,6 +10,7 @@ from typing import Callable, Optional, List
 
 import mlagents.trainers
 import mlagents_envs
+from mlagents.torch_utils import torch
 from mlagents.trainers.trainer_controller import TrainerController
 from mlagents.trainers.environment_parameter_manager import EnvironmentParameterManager
 from mlagents.trainers.trainer import TrainerFactory
@@ -253,6 +254,10 @@ def run_cli(options: RunOptions) -> None:
     add_timer_metadata("communication_protocol_version", UnityEnvironment.API_VERSION)
     add_timer_metadata("pytorch_version", torch_utils.torch.__version__)
     add_timer_metadata("numpy_version", np.__version__)
+
+    print("CUDA Settings:")
+    print(torch.cuda.is_available())
+    print(torch.cuda.get_device_name(torch.cuda.current_device()))
 
     if options.env_settings.seed == -1:
         run_seed = np.random.randint(0, 10000)
