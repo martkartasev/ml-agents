@@ -176,10 +176,11 @@ class ModelSerializer:
         logger.info(f"Exported policy {onnx_output_path}")
 
         onnx_output_path = f"{output_filepath}_vf.onnx"
+
         with exporting_to_onnx():
             torch.onnx.export(
                 self.optimizer.critic,
-                self.dummy_input,
+                (self.dummy_input[0],  torch.ones([1] + [0]), self.dummy_input[2]),
                 onnx_output_path,
                 input_names=self.input_names,
                 output_names=self.output_names_vf,
