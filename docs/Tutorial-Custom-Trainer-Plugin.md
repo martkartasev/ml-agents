@@ -1,7 +1,11 @@
+# Custom Trainer Plugin
+
+## How to write a custom trainer plugin
+
 ### Step 1: Write your custom trainer class
 Before you start writing your code, make sure to use your favorite environment management tool(e.g. `venv` or `conda`) to create and activate a Python virtual environment. The following command uses `conda`, but other tools work similarly:
 ```shell
-conda create -n trainer-env python=3.8.13
+conda create -n trainer-env python=3.10.12
 conda activate trainer-env
 ```
 
@@ -9,7 +13,7 @@ Users of the plug-in system are responsible for implementing the trainer class s
 
 Please refer to the internal [PPO implementation](../ml-agents/mlagents/trainers/ppo/trainer.py) for a complete code example. We will not provide a workable code in the document. The purpose of the tutorial is to introduce you to the core components and interfaces of our plugin framework. We use code snippets and patterns to demonstrate the control and data flow.
 
-Your custom trainers are responsible for collecting experiences and training the models. Your custom trainer class acts like a co-ordinator to the policy and optimizer. To start implementing methods in the class, create a policy class objects from method `create_policy`:
+Your custom trainers are responsible for collecting experiences and training the models. Your custom trainer class acts like a coordinator to the policy and optimizer. To start implementing methods in the class, create a policy class objects from method `create_policy`:
 
 
 ```python
@@ -239,7 +243,7 @@ Before installing your custom trainer package, make sure you have `ml-agents-env
 pip3 install -e ./ml-agents-envs && pip3 install -e ./ml-agents
 ```
 
-Install your cutom trainer package(if your package is pip installable):
+Install your custom trainer package(if your package is pip installable):
 ```shell
 pip3 install your_custom_package
 ```
@@ -256,9 +260,9 @@ mlagents-learn ml-agents-trainer-plugin/mlagents_trainer_plugin/a2c/a2c_3DBall.y
 ```
 
 ### Validate your implementations:
-Create a clean Python environment with Python 3.8+ and activate it before you start, if you haven't done so already:
+Create a clean Python environment with Python 3.10.12 and activate it before you start, if you haven't done so already:
 ```shell
-conda create -n trainer-env python=3.8.13
+conda create -n trainer-env python=3.10.12
 conda activate trainer-env
 ```
 

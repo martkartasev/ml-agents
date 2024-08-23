@@ -233,6 +233,13 @@ def _create_parser() -> argparse.ArgumentParser:
         help="Results base directory",
     )
 
+    argparser.add_argument(
+        "--timeout-wait",
+        default=60,
+        help="The period of time to wait on a Unity environment to startup for training.",
+        action=DetectDefault,
+    )
+
     eng_conf = argparser.add_argument_group(title="Engine Configuration")
     eng_conf.add_argument(
         "--width",
@@ -288,6 +295,15 @@ def _create_parser() -> argparse.ArgumentParser:
         action=DetectDefaultStoreTrue,
         help="Whether to run the Unity executable in no-graphics mode (i.e. without initializing "
         "the graphics driver. Use this only if your agents don't use visual observations.",
+    )
+
+    eng_conf.add_argument(
+        "--no-graphics-monitor",
+        default=False,
+        action=DetectDefaultStoreTrue,
+        help="Whether to run the main Unity worker in graphics mode with the remaining workers in no graphics mode"
+        "(i.e. without initializing the graphics driver. Use this only if your agents don't use visual "
+        "observations.",
     )
 
     torch_conf = argparser.add_argument_group(title="Torch Configuration")

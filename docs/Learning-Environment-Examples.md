@@ -1,6 +1,6 @@
 # Example Learning Environments
 
-<img src="images/example-envs.png" align="middle" width="3000"/>
+<img src="../images/example-envs.png" align="middle" width="3000"/>
 
 The Unity ML-Agents Toolkit includes an expanding set of example environments
 that highlight the various features of the toolkit. These environments can also
@@ -231,7 +231,7 @@ you would like to contribute environments, please see our
     objects around agent's forward direction (40 by 40 with 6 different categories).
   - Actions:
     - 3 continuous actions correspond to Forward Motion, Side Motion and Rotation
-    - 1 discrete acion branch for Laser with 2 possible actions corresponding to
+    - 1 discrete action branch for Laser with 2 possible actions corresponding to
       Shoot Laser or No Action
   - Visual Observations (Optional): First-person camera per-agent, plus one vector
     flag representing the frozen state of the agent. This scene uses a combination

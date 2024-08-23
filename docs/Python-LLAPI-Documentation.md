@@ -21,6 +21,7 @@
     * [random\_action](#mlagents_envs.base_env.ActionSpec.random_action)
     * [create\_continuous](#mlagents_envs.base_env.ActionSpec.create_continuous)
     * [create\_discrete](#mlagents_envs.base_env.ActionSpec.create_discrete)
+    * [create\_hybrid](#mlagents_envs.base_env.ActionSpec.create_hybrid)
   * [DimensionProperty](#mlagents_envs.base_env.DimensionProperty)
     * [UNSPECIFIED](#mlagents_envs.base_env.DimensionProperty.UNSPECIFIED)
     * [NONE](#mlagents_envs.base_env.DimensionProperty.NONE)
@@ -412,6 +413,16 @@ Creates an ActionSpec that is homogenously continuous
 
 Creates an ActionSpec that is homogenously discrete
 
+<a name="mlagents_envs.base_env.ActionSpec.create_hybrid"></a>
+#### create\_hybrid
+
+```python
+ | @staticmethod
+ | create_hybrid(continuous_size: int, discrete_branches: Tuple[int]) -> "ActionSpec"
+```
+
+Creates a hybrid ActionSpace
+
 <a name="mlagents_envs.base_env.DimensionProperty"></a>
 ## DimensionProperty Objects
 
@@ -623,22 +634,21 @@ class UnityEnvironment(BaseEnv)
 #### \_\_init\_\_
 
 ```python
- | __init__(file_name: Optional[str] = None, worker_id: int = 0, base_port: Optional[int] = None, seed: int = 0, no_graphics: bool = False, timeout_wait: int = 60, additional_args: Optional[List[str]] = None, side_channels: Optional[List[SideChannel]] = None, log_folder: Optional[str] = None, num_areas: int = 1)
+ | __init__(file_name: Optional[str] = None, worker_id: int = 0, base_port: Optional[int] = None, seed: int = 0, no_graphics: bool = False, no_graphics_monitor: bool = False, timeout_wait: int = 60, additional_args: Optional[List[str]] = None, side_channels: Optional[List[SideChannel]] = None, log_folder: Optional[str] = None, num_areas: int = 1)
 ```
 
 Starts a new unity environment and establishes a connection with the environment.
 Notice: Currently communication between Unity and Python takes place over an open socket without authentication.
 Ensure that the network where training takes place is secure.
 
-:string file_name: Name of Unity environment binary.
-:int base_port: Baseline port number to connect to Unity environment over. worker_id increments over this.
-If no environment is specified (i.e. file_name is None), the DEFAULT_EDITOR_PORT will be used.
-:int worker_id: Offset from base_port. Used for training multiple environments simultaneously.
-:bool no_graphics: Whether to run the Unity simulator in no-graphics mode
-:int timeout_wait: Time (in seconds) to wait for connection from environment.
-:list args: Addition Unity command line arguments
-:list side_channels: Additional side channel for no-rl communication with Unity
-:str log_folder: Optional folder to write the Unity Player log file into.  Requires absolute path.
+:string file_name: Name of Unity environment binary. :int base_port: Baseline port number to connect to Unity
+environment over. worker_id increments over this. If no environment is specified (i.e. file_name is None),
+the DEFAULT_EDITOR_PORT will be used. :int worker_id: Offset from base_port. Used for training multiple
+environments simultaneously. :bool no_graphics: Whether to run the Unity simulator in no-graphics mode :bool
+no_graphics_monitor: Whether to run the main worker in graphics mode, with the remaining in no-graphics mode
+:int timeout_wait: Time (in seconds) to wait for connection from environment. :list args: Addition Unity
+command line arguments :list side_channels: Additional side channel for no-rl communication with Unity :str
+log_folder: Optional folder to write the Unity Player log file into.  Requires absolute path.
 
 <a name="mlagents_envs.environment.UnityEnvironment.close"></a>
 #### close
@@ -668,7 +678,7 @@ of downloading the Unity Editor.
 The UnityEnvRegistry implements a Map, to access an entry of the Registry, use:
 ```python
 registry = UnityEnvRegistry()
-entry = registry[<environment_identifyier>]
+entry = registry[<environment_identifier>]
 ```
 An entry has the following properties :
  * `identifier` : Uniquely identifies this environment
@@ -679,7 +689,7 @@ An entry has the following properties :
 To launch a Unity environment from a registry entry, use the `make` method:
 ```python
 registry = UnityEnvRegistry()
-env = registry[<environment_identifyier>].make()
+env = registry[<environment_identifier>].make()
 ```
 
 <a name="mlagents_envs.registry.unity_env_registry.UnityEnvRegistry.register"></a>

@@ -61,26 +61,46 @@ With the changes to Unity Package Manager in 2021, experimental packages will no
 
 In Unity 2019.4 or later, open the Package Manager, hit the "+" button, and select "Add package from git URL".
 
+<<<<<<< HEAD
 ![Package Manager git URL](https://github.com/Unity-Technologies/ml-agents/blob/release_20_docs/docs/images/unity_package_manager_git_url.png)
 
 In the dialog that appears, enter
  ```
 git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents#release_20
+=======
+![Package Manager git URL](https://github.com/Unity-Technologies/ml-agents/blob/release_21_docs/docs/images/unity_package_manager_git_url.png)
+
+In the dialog that appears, enter
+
+```
+git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents#release_21
+>>>>>>> unity/develop
 ```
 
 You can also edit your project's `manifest.json` directly and add the following line to the `dependencies`
 section:
+
 ```
+<<<<<<< HEAD
 "com.unity.ml-agents": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents#release_20",
+=======
+"com.unity.ml-agents": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents#release_21",
+>>>>>>> unity/develop
 ```
+
 See [Git dependencies](https://docs.unity3d.com/Manual/upm-git.html#subfolder) for more information. Note that this
 may take several minutes to resolve the packages the first time that you add it.
 
 #### Local Installation for Development
 
+<<<<<<< HEAD
 [Clone the repository](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/docs/Installation.md#clone-the-ml-agents-toolkit-repository-optional) and follow the
 [Local Installation for Development](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/docs/Installation.md#advanced-local-installation-for-development-1)
 directions.
+=======
+[Clone the repository](https://github.com/Unity-Technologies/ml-agents/tree/release_21_docs/docs/Installation.md#clone-the-ml-agents-toolkit-repository-optional) and follow the
+[Local Installation for Development](https://github.com/Unity-Technologies/ml-agents/tree/release_21_docs/docs/Installation.md#advanced-local-installation-for-development-1) directions.
+>>>>>>> unity/develop
 
 ## Requirements
 
@@ -101,7 +121,7 @@ mode if training is not supported or is not currently running.
 ### Inference
 
 Inference is executed via the
-[Unity Inference Engine](https://docs.unity3d.com/Packages/com.unity.barracuda@latest/index.html).
+[Unity Inference Engine](https://docs.unity3d.com/Packages/com.unity.sentis@latest/index.html).
 
 **CPU**
 
@@ -150,12 +170,20 @@ Please refer to "Information that is passively collected by Unity" in the
 [Unity Privacy Policy](https://unity3d.com/legal/privacy-policy).
 
 [unity ML-Agents Toolkit]: https://github.com/Unity-Technologies/ml-agents
-[unity inference engine]: https://docs.unity3d.com/Packages/com.unity.barracuda@latest/index.html
+[unity inference engine]: https://docs.unity3d.com/Packages/com.unity.sentis@latest/index.html
 [package manager documentation]: https://docs.unity3d.com/Manual/upm-ui-install.html
+<<<<<<< HEAD
 [installation instructions]: https://github.com/Unity-Technologies/ml-agents/blob/release_20_docs/docs/Installation.md
+=======
+[installation instructions]: https://github.com/Unity-Technologies/ml-agents/blob/release_21_docs/docs/Installation.md
+>>>>>>> unity/develop
 [github repository]: https://github.com/Unity-Technologies/ml-agents
 [python package]: https://github.com/Unity-Technologies/ml-agents
 [execution order of event functions]: https://docs.unity3d.com/Manual/ExecutionOrder.html
 [connect with us]: https://github.com/Unity-Technologies/ml-agents#community-and-feedback
 [ml-agents forum]: https://forum.unity.com/forums/ml-agents.453/
+<<<<<<< HEAD
 [ML-Agents GitHub repo]: https://github.com/Unity-Technologies/ml-agents/blob/release_20_docs/com.unity.ml-agents.extensions
+=======
+[ML-Agents GitHub repo]: https://github.com/Unity-Technologies/ml-agents/blob/release_21_docs/com.unity.ml-agents.extensions
+>>>>>>> unity/develop

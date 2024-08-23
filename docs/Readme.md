@@ -1,6 +1,6 @@
 # Unity ML-Agents Toolkit
 
-[![docs badge](https://img.shields.io/badge/docs-reference-blue.svg)](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/docs/)
+[![docs badge](https://img.shields.io/badge/docs-reference-blue.svg)](https://github.com/Unity-Technologies/ml-agents/tree/release_21_docs/docs/)
 
 [![license badge](https://img.shields.io/badge/license-Apache--2.0-green.svg)](../LICENSE.md)
 
@@ -29,26 +29,30 @@ developer communities.
 - Support for training single-agent, multi-agent cooperative, and multi-agent
   competitive scenarios via several Deep Reinforcement Learning algorithms (PPO, SAC, MA-POCA, self-play).
 - Support for learning from demonstrations through two Imitation Learning algorithms (BC and GAIL).
+- Quickly and easily add your own [custom training algorithm](Python-Custom-Trainer-Plugin.md) and/or components.
 - Easily definable Curriculum Learning scenarios for complex tasks
 - Train robust agents using environment randomization
 - Flexible agent control with On Demand Decision Making
 - Train using multiple concurrent Unity environment instances
-- Utilizes the [Unity Inference Engine](Unity-Inference-Engine.md) to
+- Utilizes the [Sentis](Sentis.md) to
   provide native cross-platform support
 - Unity environment [control from Python](Python-LLAPI.md)
 - Wrap Unity learning environments as a [gym](Python-Gym-API.md) environment
 - Wrap Unity learning environments as a [PettingZoo](Python-PettingZoo-API.md) environment
 
 See our [ML-Agents Overview](ML-Agents-Overview.md) page for detailed
-descriptions of all these features.
+descriptions of all these features. Or go straight to our [web docs](https://unity-technologies.github.io/ml-agents/).
 ## Releases & Documentation
 
-**Our latest, stable release is `Release 20`. Click
-[here](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/docs/Readme.md)
+**Our latest, stable release is `Release 21`. Click
+[here](Getting-Started.md)
 to get started with the latest release of ML-Agents.**
+
+**You can also check out our new [web docs](https://unity-technologies.github.io/ml-agents/)!**
 
 The table below lists all our releases, including our `main` branch which is
 under active development and may be unstable. A few helpful guidelines:
+
 - The [Versioning page](Versioning.md) overviews how we manage our GitHub
   releases and the versioning process for each of the ML-Agents components.
 - The [Releases page](https://github.com/Unity-Technologies/ml-agents/releases)
@@ -61,11 +65,11 @@ under active development and may be unstable. A few helpful guidelines:
 - The `com.unity.ml-agents` package is [verified](https://docs.unity3d.com/2020.1/Documentation/Manual/pack-safe.html)
   for Unity 2020.1 and later. Verified packages releases are numbered 1.0.x.
 
-| **Version** | **Release Date** | **Source** | **Documentation** | **Download** | **Python Package** | **Unity Package** |
-|:-------:|:------:|:-------------:|:-------:|:------------:|:------------:|:------------:|
-| **Release 20** | **November 21, 2022** | **[source](https://github.com/Unity-Technologies/ml-agents/tree/release_20)** | **[docs](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/docs/Readme.md)** | **[download](https://github.com/Unity-Technologies/ml-agents/archive/release_20.zip)** | **[0.30.0](https://pypi.org/project/mlagents/0.30.0/)** | **[2.3.0](https://docs.unity3d.com/Packages/com.unity.ml-agents@2.3/manual/index.html)** |
-| **main (unstable)** | -- | [source](https://github.com/Unity-Technologies/ml-agents/tree/main) | [docs](https://github.com/Unity-Technologies/ml-agents/tree/main/docs/Readme.md) | [download](https://github.com/Unity-Technologies/ml-agents/archive/main.zip) | -- | -- |
-| **Verified Package 1.0.8** | **May 26, 2021** | **[source](https://github.com/Unity-Technologies/ml-agents/tree/com.unity.ml-agents_1.0.8)** | **[docs](https://github.com/Unity-Technologies/ml-agents/blob/release_20_verified_docs/docs/Readme.md)** | **[download](https://github.com/Unity-Technologies/ml-agents/archive/com.unity.ml-agents_1.0.8.zip)** | **[0.16.1](https://pypi.org/project/mlagents/0.16.1/)** | **[1.0.8](https://docs.unity3d.com/Packages/com.unity.ml-agents@1.0/manual/index.html)** |
+|        **Version**         | **Release Date** | **Source** | **Documentation** | **Download** | **Python Package** | **Unity Package** |
+|:--------------------------:|:------:|:-------------:|:-------:|:------------:|:------------:|:------------:|
+| **develop (unstable)** | -- | [source](https://github.com/Unity-Technologies/ml-agents/tree/develop) | [docs](https://unity-technologies.github.io/ml-agents/) | [download](https://github.com/Unity-Technologies/ml-agents/archive/develop.zip) | -- | -- |
+| **Release 21** | **October 9, 2023** | **[source](https://github.com/Unity-Technologies/ml-agents/tree/release_21)** | **[docs](https://unity-technologies.github.io/ml-agents/)** | **[download](https://github.com/Unity-Technologies/ml-agents/archive/release_21.zip)** | **[1.0.0](https://pypi.org/project/mlagents/1.0.0/)** | **[3.0.0](https://docs.unity3d.com/Packages/com.unity.ml-agents@3.0/manual/index.html)** |
+
 
 If you are a researcher interested in a discussion of Unity as an AI platform,
 see a pre-print of our
@@ -79,6 +83,7 @@ cite the following paper as a reference:
   title={Unity: A general platform for intelligent agents},
   author={Juliani, Arthur and Berges, Vincent-Pierre and Teng, Ervin and Cohen, Andrew and Harper, Jonathan and Elion, Chris and Goy, Chris and Gao, Yuan and Henry, Hunter and Mattar, Marwan and Lange, Danny},
   journal={arXiv preprint arXiv:1809.02627},
+  url={https://arxiv.org/pdf/1809.02627.pdf},
   year={2020}
 }
 ```
@@ -88,9 +93,10 @@ cite the following paper as a reference:
 
 ```
 @article{cohen2022,
-  title={On the Use and Misuse of Abosrbing States in Multi-agent Reinforcement Learning},
+  title={On the Use and Misuse of Absorbing States in Multi-agent Reinforcement Learning},
   author={Cohen, Andrew and Teng, Ervin and Berges, Vincent-Pierre and Dong, Ruo-Ping and Henry, Hunter and Mattar, Marwan and Zook, Alexander and Ganguly, Sujoy},
   journal={RL in Games Workshop AAAI 2022},
+  url={http://aaai-rlg.mlanctot.info/papers/AAAI22-RLG_paper_32.pdf},
   year={2022}
 }
 ```
@@ -159,16 +165,15 @@ We have also published a series of blog posts that are relevant for ML-Agents:
 
 ### More from Unity
 
-- [Unity Simulation Pro](https://unity.com/products/unity-simulation-pro)
-- [Unity Robotics](https://github.com/Unity-Technologies/Unity-Robotics-Hub)
-- [Unity Computer Vision](https://unity.com/computer-vision)
+- [Unity Sentis](https://unity.com/products/sentis)
+- [Introducing Unity Muse and Sentis](https://blog.unity.com/engine-platform/introducing-unity-muse-and-unity-sentis-ai)
 
 ## Community and Feedback
 
 The ML-Agents Toolkit is an open-source project and we encourage and welcome
 contributions. If you wish to contribute, be sure to review our
 [contribution guidelines](CONTRIBUTING.md) and
-[code of conduct](../CODE_OF_CONDUCT.md).
+[code of conduct](CODE_OF_CONDUCT.md).
 
 For problems with the installation and setup of the ML-Agents Toolkit, or
 discussions about how to best setup or train your agents, please create a new

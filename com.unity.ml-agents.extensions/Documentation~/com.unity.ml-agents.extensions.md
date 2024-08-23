@@ -28,24 +28,41 @@ The ML-Agents Extensions package is not currently available in the Package Manag
 recommended ways to install the package:
 
 ### Local Installation
+<<<<<<< HEAD
 [Clone the repository](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/docs/Installation.md#clone-the-ml-agents-toolkit-repository-optional) and follow the
 [Local Installation for Development](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/docs/Installation.md#advanced-local-installation-for-development-1)
+=======
+[Clone the repository](https://github.com/Unity-Technologies/ml-agents/tree/release_21_docs/docs/Installation.md#clone-the-ml-agents-toolkit-repository-optional) and follow the
+[Local Installation for Development](https://github.com/Unity-Technologies/ml-agents/tree/release_21_docs/docs/Installation.md#advanced-local-installation-for-development-1)
+>>>>>>> unity/develop
 directions (substituting `com.unity.ml-agents.extensions` for the package name).
 
 ### Github via Package Manager
 In Unity 2019.4 or later, open the Package Manager, hit the "+" button, and select "Add package from git URL".
 
+<<<<<<< HEAD
 ![Package Manager git URL](https://github.com/Unity-Technologies/ml-agents/blob/release_20_docs/docs/images/unity_package_manager_git_url.png)
 
 In the dialog that appears, enter
  ```
 git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_20
+=======
+![Package Manager git URL](https://github.com/Unity-Technologies/ml-agents/blob/release_21_docs/docs/images/unity_package_manager_git_url.png)
+
+In the dialog that appears, enter
+ ```
+git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_21
+>>>>>>> unity/develop
 ```
 
 You can also edit your project's `manifest.json` directly and add the following line to the `dependencies`
 section:
 ```
+<<<<<<< HEAD
 "com.unity.ml-agents.extensions": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_20",
+=======
+"com.unity.ml-agents.extensions": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_21",
+>>>>>>> unity/develop
 ```
 See [Git dependencies](https://docs.unity3d.com/Manual/upm-git.html#subfolder) for more information. Note that this
 may take several minutes to resolve the packages the first time that you add it.
@@ -67,4 +84,8 @@ If using the `InputActuatorComponent`
     - No way to customize the action space of the `InputActuatorComponent`
 
 ## Need Help?
+<<<<<<< HEAD
 The main [README](https://github.com/Unity-Technologies/ml-agents/tree/release_20_docs/README.md) contains links for contacting the team or getting support.
+=======
+The main [README](https://github.com/Unity-Technologies/ml-agents/tree/release_21_docs/README.md) contains links for contacting the team or getting support.
+>>>>>>> unity/develop

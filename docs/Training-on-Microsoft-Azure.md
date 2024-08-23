@@ -5,7 +5,7 @@ correctly. We've decided to keep it up just in case it is helpful to you.
 
 This page contains instructions for setting up training on Microsoft Azure
 through either
-[Azure Container Instances](https://azure.microsoft.com/services/container-instances/)
+[Azure Container Instances](https://azure.microsoft.com/en-us/products/container-instances/)
 or Virtual Machines. Non "headless" training has not yet been tested to verify
 support.
 
@@ -13,7 +13,7 @@ support.
 
 A pre-configured virtual machine image is available in the Azure Marketplace and
 is nearly completely ready for training. You can start by deploying the
-[Data Science Virtual Machine for Linux (Ubuntu)](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/microsoft-dsvm.ubuntu-1804)
+[Data Science Virtual Machine for Linux (Ubuntu)](https://learn.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro?view=azureml-api-2)
 into your Azure subscription.
 
 Note that, if you choose to deploy the image to an
@@ -33,7 +33,7 @@ view the documentation for doing so [here](#custom-instances).
    instance, and set it as the working directory.
 2. Install the required packages:
    Torch: `pip3 install torch==1.7.0 -f https://download.pytorch.org/whl/torch_stable.html` and
-   MLAgents: `python -m pip install mlagents==0.30.0`
+   MLAgents: `python -m pip install mlagents==1.0.0`
 
 ## Testing
 
@@ -112,7 +112,7 @@ Once you have started training, you can
 
 ## Running on Azure Container Instances
 
-[Azure Container Instances](https://azure.microsoft.com/services/container-instances/)
+[Azure Container Instances](https://azure.microsoft.com/en-us/products/container-instances/)
 allow you to spin up a container, on demand, that will run your training and
 then be shut down. This ensures you aren't leaving a billable VM running when it
 isn't needed. Using ACI enables you to offload training of your models without

@@ -1,4 +1,5 @@
-using Unity.Barracuda;
+using Unity.Sentis;
+using Unity.MLAgents.Inference;
 
 namespace Unity.MLAgents.Sensors
 {
@@ -50,16 +51,22 @@ namespace Unity.MLAgents.Sensors
             }
 
             sensor.Write(writer);
+            bool mismatch = false;
+            errorMessage = null;
             for (var i = 0; i < output.Length; i++)
             {
                 if (expected[i] != output[i])
                 {
-                    errorMessage = $"Expected and actual differed in position {i}. Expected: {expected[i]}  Actual: {output[i]} ";
-                    return false;
+                    string error = $"Expected and actual differed in position {i}. Expected: {expected[i]}  Actual: {output[i]} ";
+                    errorMessage = !mismatch ? error : $"{errorMessage}\n{error}";
+                    mismatch = true;
                 }
             }
+            if (mismatch)
+            {
+                return false;
+            }
 
-            errorMessage = null;
             return true;
         }
 
@@ -76,7 +83,7 @@ namespace Unity.MLAgents.Sensors
         public static bool CompareObservation(ISensor sensor, float[,,] expected, out string errorMessage)
         {
             var tensorShape = new TensorShape(0, expected.GetLength(0), expected.GetLength(1), expected.GetLength(2));
-            var numExpected = tensorShape.height * tensorShape.width * tensorShape.channels;
+            var numExpected = tensorShape.Height() * tensorShape.Width() * tensorShape.Channels();
             const float fill = -1337f;
             var output = new float[numExpected];
             for (var i = 0; i < numExpected; i++)
@@ -107,16 +114,16 @@ namespace Unity.MLAgents.Sensors
             }
 
             sensor.Write(writer);
-            for (var h = 0; h < tensorShape.height; h++)
+            for (var h = 0; h < tensorShape.Height(); h++)
             {
-                for (var w = 0; w < tensorShape.width; w++)
+                for (var w = 0; w < tensorShape.Width(); w++)
                 {
-                    for (var c = 0; c < tensorShape.channels; c++)
+                    for (var c = 0; c < tensorShape.Channels(); c++)
                     {
-                        if (expected[h, w, c] != output[tensorShape.Index(0, h, w, c)])
+                        if (expected[c, h, w] != output[tensorShape.Index(0, c, h, w)])
                         {
-                            errorMessage = $"Expected and actual differed in position [{h}, {w}, {c}]. " +
-                                $"Expected: {expected[h, w, c]}  Actual: {output[tensorShape.Index(0, h, w, c)]} ";
+                            errorMessage = $"Expected and actual differed in position [{c}, {h}, {w}]. " +
+                                $"Expected: {expected[c, h, w]}  Actual: {output[tensorShape.Index(0, c, h, w)]} ";
                             return false;
                         }
                     }

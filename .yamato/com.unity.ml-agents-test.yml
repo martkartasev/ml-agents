@@ -1,31 +1,33 @@
 {% metadata_file .yamato/coverage_tests.metafile %}
 test_editors:
-    - version: 2021.3
+    - version: 2023.2
         # We want some scene tests to run in the DevProject, but packages there only support 2020+
       testProject: Project
       enableNoDefaultPackages: !!bool true
-    - version: 2022.1
+    - version: 2023.2
       testProject: DevProject
       enableNoDefaultPackages: !!bool true
 
 trunk_editor:
-    - version: trunk
-        # Workaround for MLA-1596 - need to make sure we load the right results.
-      testProject: DevProject
+   # TODO: re-enable trunk tests after adding support for Unity 6. As of 12 Mar 2024, tests fail
+   # with "Error: '6000.0.0b12' is not a valid Unity version"
+   # - version: trunk
+   #     # Workaround for MLA-1596 - need to make sure we load the right results.
+   #   testProject: DevProject
 
 test_platforms:
     - name: win
       type: Unity::VM
-      image: package-ci/win10:stable
+      image: package-ci/win11:v4
       flavor: b1.large
     - name: mac
       type: Unity::VM::osx
-      image: package-ci/mac:stable
-      flavor: b1.small
+      image: package-ci/macos-13:v4
+      flavor: b1.large
     - name: linux
       type: Unity::VM
       image: ml-agents/ml-agents-ubuntu-18.04:latest
-      flavor: b1.medium
+      flavor: b1.large
 
 packages:
     - name: com.unity.ml-agents
@@ -42,18 +44,18 @@ all_package_tests:
         {% for coverage_editor in coverage_test_editors %}
         {% for coverage_platform in coverage_test_platforms %}
         {% for coverage_package in coverage_test_packages %}
-        - .yamato/com.unity.ml-agents-coverage.yml#test_coverage_{{ coverage_package.name }}_{{ coverage_platform.name }}_{{ coverage_editor.version }}
+        - .yamato/com.unity.ml-agents-coverage.yml#test_coverage_{{ coverage_package.name }}_{{ coverage_platform.name }}_{{ coverage_editor.version }}_{{ coverage_editor.testProject }}
         {% endfor %}
         {% endfor %}
         {% endfor %}
         {% for editor in test_editors %}
         {% for platform in test_platforms %}
-        - .yamato/com.unity.ml-agents-test.yml#test_com.unity.ml-agents_{{ platform.name }}_{{ editor.version }}
+        - .yamato/com.unity.ml-agents-test.yml#test_com.unity.ml-agents_{{ platform.name }}_{{ editor.version }}_{{ editor.testProject }}
         {% endfor %}
         {% endfor %}
         {% for editor in trunk_editor %}
         {% for platform in test_platforms %}
-        - .yamato/com.unity.ml-agents-test.yml#test_com.unity.ml-agents_{{ platform.name }}_{{ editor.version }}
+        - .yamato/com.unity.ml-agents-test.yml#test_com.unity.ml-agents_{{ platform.name }}_{{ editor.version }}_{{ editor.testProject }}
         {% endfor %}
         {% endfor %}
     triggers:
@@ -72,8 +74,8 @@ all_package_tests:
   {% assign noDefaultPackagesOptions = "" %}
   {% endif %}
 
-test_{{ package.name }}_{{ platform.name }}_{{ editor.version }}:
-    name : {{ package.name }} test {{ editor.version }} on {{ platform.name }}
+test_{{ package.name }}_{{ platform.name }}_{{ editor.version }}_{{ editor.testProject }}:
+    name : {{ package.name }} test {{ editor.version }} on {{ platform.name }} in {{ editor.testProject }}
     agent:
         type: {{ platform.type }}
         image: {{ platform.image }}
@@ -90,7 +92,7 @@ test_{{ package.name }}_{{ platform.name }}_{{ editor.version }}:
         {% for coverage_editor in coverage_test_editors %}
         {% for coverage_platform in coverage_test_platforms %}
         {% for coverage_package in coverage_test_packages %}
-        - .yamato/com.unity.ml-agents-coverage.yml#test_coverage_{{ coverage_package.name }}_{{ coverage_platform.name }}_{{ coverage_editor.version }}
+        - .yamato/com.unity.ml-agents-coverage.yml#test_coverage_{{ coverage_package.name }}_{{ coverage_platform.name }}_{{ coverage_editor.version }}_{{ coverage_editor.testProject }}
         {% endfor %}
         {% endfor %}
         {% endfor %}
@@ -117,8 +119,8 @@ test_{{ package.name }}_{{ platform.name }}_{{ editor.version }}:
   {% for editor in trunk_editor %}
   {% for platform in test_platforms %}
 
-test_{{ package.name }}_{{ platform.name }}_trunk:
-    name : {{ package.name }} test {{ editor.version }} on {{ platform.name }}
+test_{{ package.name }}_{{ platform.name }}_{{ editor.version}}_{{ editor.testProject }}:
+    name : {{ package.name }} test {{ editor.version }} on {{ platform.name }} in {{ editor.testProject }}
     agent:
         type: {{ platform.type }}
         image: {{ platform.image }}
@@ -126,7 +128,7 @@ test_{{ package.name }}_{{ platform.name }}_trunk:
     commands:
         - |
 {% if platform.name == "linux" %}
-          conda activate python3.8
+          conda activate python3.10
 {% endif %}
           python -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
           unity-downloader-cli -u trunk -c editor --wait --fast
@@ -141,7 +143,7 @@ test_{{ package.name }}_{{ platform.name }}_trunk:
         {% for coverage_editor in coverage_test_editors %}
         {% for coverage_platform in coverage_test_platforms %}
         {% for coverage_package in coverage_test_packages %}
-        - .yamato/com.unity.ml-agents-coverage.yml#test_coverage_{{ coverage_package.name }}_{{ coverage_platform.name }}_{{ coverage_editor.version }}
+        - .yamato/com.unity.ml-agents-coverage.yml#test_coverage_{{ coverage_package.name }}_{{ coverage_platform.name }}_{{ coverage_editor.version }}_{{ coverage_editor.testProject }}
         {% endfor %}
         {% endfor %}
         {% endfor %}

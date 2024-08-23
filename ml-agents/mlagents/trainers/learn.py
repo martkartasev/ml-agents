@@ -99,8 +99,10 @@ def run_training(run_seed: int, options: RunOptions, num_areas: int) -> None:
         env_factory = create_environment_factory(
             env_settings.env_path,
             engine_settings.no_graphics,
+            engine_settings.no_graphics_monitor,
             run_seed,
             num_areas,
+            env_settings.timeout_wait,
             port,
             env_settings.env_args,
             os.path.abspath(run_logs_dir),  # Unity environment requires absolute path
@@ -173,8 +175,10 @@ def write_timing_tree(output_dir: str) -> None:
 def create_environment_factory(
     env_path: Optional[str],
     no_graphics: bool,
+    no_graphics_monitor: bool,
     seed: int,
     num_areas: int,
+    timeout_wait: int,
     start_port: Optional[int],
     env_args: Optional[List[str]],
     log_folder: str,
@@ -190,10 +194,12 @@ def create_environment_factory(
             seed=env_seed,
             num_areas=num_areas,
             no_graphics=no_graphics,
+            no_graphics_monitor=no_graphics_monitor,
             base_port=start_port,
             additional_args=env_args,
             side_channels=side_channels,
             log_folder=log_folder,
+            timeout_wait=timeout_wait,
         )
 
     return create_unity_environment

@@ -10,20 +10,18 @@ on:
 
 jobs:
   build-and-publish:
-    # Only run on GitHub Enterprise
-    if: ${{ github.server_url == 'https://github.cds.internal.unity3d.com' }}
     name: publish to PyPI (or TestPyPI)
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
     strategy:
         matrix:
             package-path: [ml-agents-envs]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: 3.10.x
     - name: Install dependencies
       run: pip install setuptools wheel twine --user
     - name: verify git tag vs. version
