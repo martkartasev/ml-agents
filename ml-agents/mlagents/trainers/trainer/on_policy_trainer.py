@@ -6,6 +6,7 @@ from collections import defaultdict
 from typing import cast
 
 import numpy as np
+import os
 
 from mlagents_envs.logging_util import get_logger
 from mlagents.trainers.buffer import BufferKey
@@ -113,6 +114,25 @@ class OnPolicyTrainer(RLTrainer):
                 self._stats_reporter.add_stat(stat, val)
         self._clear_update_buffer()
         return True
+
+    def _clear_update_buffer(self) -> None:
+        """
+        Clear the buffers that have been built up during inference.
+        """
+        self.save_replay_buffer()
+        self.update_buffer.reset_agent()
+
+    def save_replay_buffer(self) -> None:
+        """
+        Save the training buffer's update buffer to a pickle file.
+        """
+        filename = os.path.join(self.artifact_path, "replay_buffer_" + str(self._step) + ".hdf5")
+        logger.info(f"Saving Experience Replay Buffer to {filename}...")
+        with open(filename, "wb") as file_object:
+            self.update_buffer.save_to_file(file_object)
+            logger.info(
+                f"Saved Experience Replay Buffer ({os.path.getsize(filename)} bytes)."
+            )
 
     def add_policy(
         self, parsed_behavior_id: BehaviorIdentifiers, policy: Policy
