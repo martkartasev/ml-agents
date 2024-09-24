@@ -8,7 +8,7 @@ import numpy as np
 
 from mlagents_envs.base_env import BehaviorSpec
 from mlagents_envs.logging_util import get_logger
-from mlagents.trainers.buffer import BufferKey, RewardSignalUtil
+from mlagents.trainers.buffer import BufferKey, RewardSignalUtil, AgentBuffer
 from mlagents.trainers.trainer.on_policy_trainer import OnPolicyTrainer
 from mlagents.trainers.policy.policy import Policy
 from mlagents.trainers.trainer.trainer_utils import get_gae
@@ -71,6 +71,7 @@ class PPOTrainer(OnPolicyTrainer):
         Processing involves calculating value and advantage targets for model updating step.
         :param trajectory: The Trajectory tuple containing the steps to be processed.
         """
+        # TODO: super()._process_trajectory(trajectory) increases steps before .to_agentbuffer. Need to truncate here and save long copy for additional buffer in separate method.
         super()._process_trajectory(trajectory)
         agent_id = trajectory.agent_id  # All the agents should have the same ID
 

@@ -9,7 +9,7 @@ import numpy as np
 import os
 
 from mlagents_envs.logging_util import get_logger
-from mlagents.trainers.buffer import BufferKey
+from mlagents.trainers.buffer import BufferKey, AgentBuffer
 from mlagents.trainers.trainer.rl_trainer import RLTrainer
 from mlagents.trainers.policy import Policy
 from mlagents.trainers.optimizer.torch_optimizer import TorchOptimizer
@@ -53,6 +53,7 @@ class OnPolicyTrainer(RLTrainer):
         self.hyperparameters = cast(
             OnPolicyHyperparamSettings, self.trainer_settings.hyperparameters
         )
+        self.additional_update_buffer: AgentBuffer = AgentBuffer()
         self.seed = seed
         self.policy: Policy = None  # type: ignore
         self.optimizer: TorchOptimizer = None  # type: ignore
@@ -121,15 +122,17 @@ class OnPolicyTrainer(RLTrainer):
         """
         self.save_replay_buffer()
         self.update_buffer.reset_agent()
+        self.additional_update_buffer.reset_agent()
 
     def save_replay_buffer(self) -> None:
         """
         Save the training buffer's update buffer to a pickle file.
         """
-        filename = os.path.join(self.artifact_path, "replay_buffer_" + str(self._step) + ".hdf5")
+        filename = os.path.join(self.artifact_path, "extended_replay_buffer_" + str(self._step) + ".hdf5")
         # logger.info(f"Saving Experience Replay Buffer to {filename}...")
         with open(filename, "wb") as file_object:
             self.update_buffer.save_to_file(file_object)
+            # self.additional_update_buffer.save_to_file(file_object)
             # logger.info(f"Saved Experience Replay Buffer ({os.path.getsize(filename)} bytes).")
 
     def add_policy(
