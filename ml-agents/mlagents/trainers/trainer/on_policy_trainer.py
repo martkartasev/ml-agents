@@ -53,7 +53,7 @@ class OnPolicyTrainer(RLTrainer):
         self.hyperparameters = cast(
             OnPolicyHyperparamSettings, self.trainer_settings.hyperparameters
         )
-        self.additional_update_buffer: AgentBuffer = AgentBuffer()
+       # self.additional_update_buffer: AgentBuffer = AgentBuffer()
         self.seed = seed
         self.policy: Policy = None  # type: ignore
         self.optimizer: TorchOptimizer = None  # type: ignore
@@ -122,7 +122,7 @@ class OnPolicyTrainer(RLTrainer):
         """
         self.save_replay_buffer()
         self.update_buffer.reset_agent()
-        self.additional_update_buffer.reset_agent()
+        # self.additional_update_buffer.reset_agent()
 
     def save_replay_buffer(self) -> None:
         """
