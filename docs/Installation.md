@@ -25,7 +25,7 @@ The ML-Agents Toolkit contains several components:
 Consequently, to install and use the ML-Agents Toolkit you will need to:
 
 - Install Unity (2023.2 or later)
-- Install Python (3.10.12 or higher)
+- Install Python (>= 3.10.1, <=3.10.12) - we recommend using 3.10.12
 - Clone this repository (Recommended for the latest version and bug fixes)
   - __Note:__ If you do not clone the repository, then you will not be
   able to access the example environments and training configurations or the
@@ -72,17 +72,25 @@ of our tutorials / guides assume you have access to our example environments).
 the repository if you would like to explore more examples.
 
 ```sh
-git clone --branch release_21 https://github.com/Unity-Technologies/ml-agents.git
+git clone --branch release_22 https://github.com/Unity-Technologies/ml-agents.git
 ```
 
-The `--branch release_21` option will switch to the tag of the latest stable
-release. Omitting that will get the `main` branch which is potentially unstable.
+The `--branch release_22` option will switch to the tag of the latest stable
+release. Omitting that will get the `develop` branch which is potentially unstable.
+However, if you find that a release branch does not work, the recommendation is to use
+the `develop` branch as it may have potential fixes for bugs and dependency issues.
+
+(Optional to get bleeding edge)
+
+```sh
+git clone https://github.com/Unity-Technologies/ml-agents.git
+```
 
 #### Advanced: Local Installation for Development
 
 You will need to clone the repository if you plan to modify or extend the
 ML-Agents Toolkit for your purposes. If you plan to contribute those changes
-back, make sure to clone the `develop` branch (by omitting `--branch release_21`
+back, make sure to clone the `develop` branch (by omitting `--branch release_22`
 from the command above). See our
 [Contributions Guidelines](../com.unity.ml-agents/CONTRIBUTING.md) for more
 information on contributing to the ML-Agents Toolkit.
@@ -187,7 +195,7 @@ line parameters you can use with `mlagents-learn`.
 the following command:
 
 ```shell
-python -m pip install mlagents==1.0.0
+python -m pip install mlagents==1.1.0
 ```
 
 which will install the latest version of ML-Agents and associated dependencies available on PyPi. Note, you need to have the matching version of
