@@ -233,7 +233,7 @@ class Trajectory(NamedTuple):
                 agent_buffer_trajectory[BufferKey.MEMORY].append(exp.memory)
 
             agent_buffer_trajectory[BufferKey.MASKS].append(1.0)
-            agent_buffer_trajectory[BufferKey.DONE].append(exp.done)
+            agent_buffer_trajectory[BufferKey.DONE].append(exp.done and not exp.interrupted)
             agent_buffer_trajectory[BufferKey.GROUP_DONES].append(
                 [_status.done for _status in exp.group_status]
             )
