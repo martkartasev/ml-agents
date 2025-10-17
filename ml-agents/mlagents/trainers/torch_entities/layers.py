@@ -7,7 +7,8 @@ from mlagents.trainers.torch_entities.model_serialization import exporting_to_on
 
 class Swish(torch.nn.Module):
     def forward(self, data: torch.Tensor) -> torch.Tensor:
-        return torch.mul(data, torch.sigmoid(data))
+        # torch.mul(data, torch.sigmoid(data))
+        return torch.relu(data)
 
 
 class Initialization(Enum):
